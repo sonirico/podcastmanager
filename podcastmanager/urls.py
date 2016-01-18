@@ -1,10 +1,10 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from demo.views import index
+#from demo.views import index
 from django.contrib.admin.views.decorators import staff_member_required
 
 urlpatterns = [
-    url(r'^$', index),
+#    url(r'^$', index),
     url(r'^api/', include('api.urls')),
     url(r'^live/', include('live.urls')),
     url(r'^grappelli/', include('grappelli.urls')),

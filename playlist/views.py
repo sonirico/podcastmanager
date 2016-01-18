@@ -145,16 +145,20 @@ def update_playlist(request):
     duration = 0
     if len(episodes) > 0:  # The code will normally enter here
         for episode in episodes:
+            print episode.duration, episode
             # Add episode
             pm.add_song(episode.get_filename())
             if episode.duration is not None:
                 duration += episode.duration
+            print 'Acummulate duration: ', duration
             # Add promotions
             for interval in promos:
                 promo_list = promos[interval]
                 if counters[interval] < len(promo_list):
                     promo = promo_list[counters[interval]]
+                    print promo.duration, promo
                     if duration >= interval:
+                        print 'Added: ', promo
                         pm.add_song(promo.get_filename())
                         counters[interval] += 1  # Move to the next promo
                         added[interval] = True
@@ -162,6 +166,7 @@ def update_playlist(request):
                 for interval in added:
                     added[interval] = False  # Reset to false and restart again
                 duration = 0
+            print added                
     else:  # No episodes in playlist. Should we add promos alone?
         for interval in promos:
             promo_list = promos[interval]
@@ -235,9 +240,11 @@ def get_promo_list_by_time_interval():
     promos = {}
     for category in PromoCategory.objects.values('id', 'time_interval').order_by(
             'time_interval'):  # group by time_interval
-        promos[category['time_interval']] = Promotion.objects \
-            .filter(category__id=category['id']) \
-            .order_by('title')
+        category_obj = PromoCategory.objects.get(pk=category['id'])		
+        if category_obj.promotion_set.all().count() > 0:				
+            promos[category['time_interval']] = Promotion.objects \
+                .filter(category__id=category['id']) \
+                .order_by('title')
     return promos
 
 

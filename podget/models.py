@@ -238,7 +238,7 @@ def download_audio(episode_item):
             logger.info(u'Audio type is not either mp3 nor mp4')
             return False
         else:
-            episode_item.get['duration'] = int(audio.info.length)
+            episode_item['duration'] = int(audio.info.length)
             # Does the audio exceed its duration?
             max_duration = episode_item.get('podcast').get_max_duration()
             if episode_item.get('duration') >= max_duration:

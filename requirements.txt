@@ -9,7 +9,7 @@ django-common-helpers==0.7.0
 django-filter==0.10.0
 django-grappelli==2.6.5
 django-polymorphic==0.7.1
-feedparser==5.2.0
+feedparser==5.2.1
 kombu==3.0.26
 lxml==3.4.4
 Markdown==2.6.2
@@ -26,8 +26,9 @@ six==1.9.0
 urlgrabber==3.1.0
 wheel==0.24.0
 django-kronos==0.8
-# Make sure you have installed before install opml !!!
 
+# Make sure you have installed before install opml !!!
+# sudo apt-get install libxml2 libxslt1.1 libxml2-dev libxslt1-dev python-libxml2 python-libxslt1 python-dev python-setuptools
 # libxml2
 # libxslt1.1
 # libxml2-dev
@@ -36,6 +37,7 @@ django-kronos==0.8
 # python-libxslt1
 # python-dev
 # python-setuptools
+# python2.7-dev
 
 opml==0.5
 
